@@ -1,15 +1,16 @@
-# script to create pipeline
-# building dotnet application
-# adding updates
-pool:
-  vmImage: ubuntu-latest
+#Creating building pipeline for dotnet app
 stages:
-  - stage: CIbuildstage
+  - stage: Continuos_integration
+    displayName: continuos-integration
     jobs:
-    - job : CIjob
-      steps:
+    - job: dotnet_Build
+      displayName: dotnet-build-job
+      steps: 
       - script: dotnet restore
-        displayName: restore-task
-      - script: dotnet build
-        displayName: dotnet-build-task
-  
+        displayName: restore
+      - script: dptnet build
+        displayName: build
+      - script: dotnet test
+        displayName: test
+      - script: dotnet publish
+        displayName: publish artifacts
